@@ -1,0 +1,30 @@
+<div ng-repeat="elem in elements[2].mcqn">
+    <div>
+        <br>
+        <span ng-model="elem.question" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+            {{ elem.question }}
+        </span>
+        <div ng-show="editorEnabled">
+            <input ng-model="elem.question" ng-show="editorEnabled">
+            <button class="btn btn-default center-block" href="#" ng-click="editorEnabled=false">Done editing</button>
+        </div>
+        <br>
+
+        <button class="btn btn-default center-block" class="button button-dark" ng-click="addOptions(elem)">Add Option</button>
+        <button class="btn btn-default center-block" ng-click="saveItemMcqn(elem,$index)">Save Question</button>
+        <button class="btn btn-default center-block" ng-click="deleteItemMcqn(elem,$index)">Delete Question</button>
+        <div ng-repeat="opt in elem.opt">
+            <div ng-repeat="final in opt.optionsArray">
+                <input disabled type="checkbox">
+                <span ng-model="final.option1" ng-hide="editorEnabled2" ng-click="editorEnabled2=true">
+                    {{ final.option1 }}
+                </span>
+                <div ng-show="editorEnabled2">
+                    <input ng-model="final.option1" ng-show="editorEnabled2">
+                    <button class="btn btn-default center-block" href="#" ng-click="editorEnabled2=false">Done editing</button>
+                </div>
+            </div>
+            <button class="btn btn-default center-block" ng-click="removeItemOption(elem.opt,$index)">Remove Option</button>
+        </div>
+    </div>
+</div>

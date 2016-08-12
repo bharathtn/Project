@@ -1,0 +1,108 @@
+<div id="page-wrapper" data-ng-controller="ResponsesCtrl" data-ng-init="sendTo()">
+    <div class="container-fluid" ng-hide="hideMain">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                            Responses
+                        </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i> <a href="#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-mail-reply"></i> Responses
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Questionnaire
+                        </th>
+                        <th>
+                            Sent To
+                        </th>
+                        <th class="text-center">
+                            Details
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="response in responses">
+                        <td>
+                            {{ response.questionnaire.name }}
+                        </td>
+
+                        <td>
+                            {{ response.user.name }}
+                        </td>
+                        <td>
+                            <button class="btn btn-default center-block" type="button" ng-click="showDetails(response._id)">Details</a>
+                        </td>
+                        <tr dir-paginate-end />
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <br>
+    </div>
+
+    <div class="container-fluid" ng-show="hideMain">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    {{ selectedResponse.user.name }}'s Response for  {{ selectedResponse.questionnaire.name }}
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i> <a href="#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-mail-reply"></i> Responses
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Response
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="answer in selectedResponse.answers">
+                        <td>
+                            <br>
+                            {{ answer.text }}
+                            <br>
+                            <br>
+                            <div ng-repeat="ans in answer.value">
+                                <input type="text" class="form-control" value="{{ ans }}" disabled>
+                                <!--
+                                <input ng-if="answer.type == 'text' || answer.type == 'TEXT'" type="text" disabled value="{{ value }}"> {{ ans }}
+                                <input ng-if="answer.type == 'mcq1' || answer.type == 'MCQ1'" type="radio" disabled value="{{ value }}"> {{ ans }}
+                                <input ng-if="answer.type == 'mcqn' || answer.type == 'MCQN'" type="checkbox" disabled value="{{ value }}"> {{ ans }}
+                                <input ng-if="answer.type == 'rate' || answer.type == 'RATE'" type="text" disabled value="{{ value }}"> {{ ans }}
+-->
+                            </div>
+                            <br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button class="btn btn-default center-block" type="button" ng-click="returnToResponses()">Return Back</button>
+        </div>
+    </div>
+</div>

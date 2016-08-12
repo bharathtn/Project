@@ -1,0 +1,321 @@
+<div id="page-wrapper" ng-controller="CreateQuestionsCtrl">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Create New Questionnaire
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i> <a href="#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file"></i> Create Questionnaire
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <br>
+
+        <form data-ng-submit="createQuestionnaire()">
+            <div class="row form">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <h4>Enter Name For This Questionnaire : </h4>
+                    <br>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-circle"></i></span>
+                        <input type="text" class="form-control" placeholder="Questionnaire Name" ng-model="questionnaireName">
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="input-group row" ng-repeat="elem in elements[0].text1">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div>
+                                <h4>Please write a question below &amp; click on save.</h4>
+                                <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
+                                    <input type="text" class="form-control" ng-model="elem.question" placeholder="Enter the question here.">
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <input type="text" class="form-control" ng-model="answer" placeholder="Sorry, but you can't write here." disabled>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+                            <br>
+                            <br>
+                            <div class="form-group input-group" style="position: relative;">
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="saveItemText(elem,$index)"><i class="fa fa-save"></i>
+                                        <!--Save Question-->
+                                    </button>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="deleteItemText(elem,$index)"><i class="fa fa-arrows-alt"></i>
+                                        <!--Delete Question-->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="input-group row" ng-repeat="elem in elements[1].mcq1">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div>
+                                <h4>Please write a question below &amp; click on save.</h4>
+                                <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
+                                    <input type="text" class="form-control" ng-model="elem.question" placeholder="Enter the question here.">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                    <div class="input-group center-block" ng-repeat="opt in elem.opt">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <div class="input-group input-group-sm" ng-repeat="final in opt.optionsArray">
+                                                    <span class="input-group-addon" id="sizing-addon3">
+                                                <i class="fa fa-dot-circle-o"></i>
+                                            </span>
+                                                    <input class="form-control" type="text" ng-model="final.option1" placeholder="Enter Option Here">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-default btn-sm" ng-click="removeItemOption(elem.opt,$index)">Remove This Option</button>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <button class="btn btn-default center-block" style="border-radius: 50%;" ng-click="addOptions(elem)"><i class="fa fa-plus"></i>
+                                        <!--Add Option-->
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+                            <br>
+                            <br>
+                            <br>
+                            <div class="form-group input-group" style="position: relative;">
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="saveItemMcq1(elem,$index)"><i class="fa fa-save"></i>
+                                        <!--Save Question-->
+                                    </button>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="deleteItemMcq1(elem,$index)"><i class="fa fa-arrows-alt"></i>
+                                        <!--Delete Question-->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="input-group row" ng-repeat="elem in elements[2].mcqn">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div>
+                                <h4>Please write a question below &amp; click on save.</h4>
+                                <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
+                                    <input type="text" class="form-control" ng-model="elem.question" placeholder="Enter the question here.">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                    <div class="input-group center-block" ng-repeat="opt in elem.opt">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <div class="input-group input-group-sm" ng-repeat="final in opt.optionsArray">
+                                                    <span class="input-group-addon" id="sizing-addon3">
+                                                <i class="fa fa-check-square-o"></i>
+                                            </span>
+                                                    <input class="form-control" type="text" ng-model="final.option1" placeholder="Enter Option Here">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-default btn-sm" ng-click="removeItemOption(elem.opt,$index)">Remove This Option</button>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <button class="btn btn-default center-block" style="border-radius: 50%;" ng-click="addOptions(elem)"><i class="fa fa-plus"></i>
+                                        <!--Add Option-->
+                                    </button>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+                            <br>
+                            <br>
+                            <div class="form-group input-group" style="position: relative;">
+                                <br>
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="saveItemMcqn(elem,$index)"><i class="fa fa-save"></i>
+                                        <!--Save Question-->
+                                    </button>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="deleteItemMcqn(elem,$index)"><i class="fa fa-arrows-alt"></i>
+                                        <!--Delete Question-->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="input-group row" ng-repeat="elem in elements[3].rate">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div>
+                                <h4>Please write a question below &amp; click on save.</h4>
+                                <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
+                                    <input type="text" class="form-control" ng-model="elem.question" placeholder="Enter the question here.">
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <div class="cont">
+                                    <div class="stars">
+                                        <input disabled class="star star-5" id="star-5-2" type="radio" name="star" />
+                                        <label class="star star-5" for="star-5-2"></label>
+                                        <input disabled class="star star-4" id="star-4-2" type="radio" name="star" />
+                                        <label class="star star-4" for="star-4-2"></label>
+                                        <input disabled class="star star-3" id="star-3-2" type="radio" name="star" />
+                                        <label class="star star-3" for="star-3-2"></label>
+                                        <input disabled class="star star-2" id="star-2-2" type="radio" name="star" />
+                                        <label class="star star-2" for="star-2-2"></label>
+                                        <input disabled class="star star-1" id="star-1-2" type="radio" name="star" />
+                                        <label class="star star-1" for="star-1-2"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+                            <br>
+                            <br>
+                            <div class="form-group input-group" style="position: relative;">
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="saveItemRate(elem,$index)"><i class="fa fa-save"></i>
+                                        <!--Save Question-->
+                                    </button>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-default" style="border-radius: 50%;" ng-click="deleteItemRate(elem,$index)"><i class="fa fa-arrows-alt"></i>
+                                        <!--Delete Question-->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--
+                    <div class="input-group" ng-repeat="elem in elements[3].rate">
+                        <div>
+                            <br>
+                            <span ng-model="elem.question" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+                                {{ elem.question }}
+                            </span>
+                            <div ng-show="editorEnabled">
+                                <input ng-model="elem.question" ng-show="editorEnabled">
+                                <button class="btn btn-default center-block" href="#" ng-click="editorEnabled=false">Done editing</button>
+                            </div>
+                            <button class="btn btn-default center-block" ng-click="saveItemRate(elem,$index)">Save Question</button>
+                            <button class="btn btn-default center-block" ng-click="deleteItemRate(elem,$index)">Delete Question</button>
+                            <br>
+
+                            <div class="cont">
+                                <div class="stars">
+                                    <input disabled class="star star-5" id="star-5-2" type="radio" name="star" />
+                                    <label class="star star-5" for="star-5-2"></label>
+                                    <input disabled class="star star-4" id="star-4-2" type="radio" name="star" />
+                                    <label class="star star-4" for="star-4-2"></label>
+                                    <input disabled class="star star-3" id="star-3-2" type="radio" name="star" />
+                                    <label class="star star-3" for="star-3-2"></label>
+                                    <input disabled class="star star-2" id="star-2-2" type="radio" name="star" />
+                                    <label class="star star-2" for="star-2-2"></label>
+                                    <input disabled class="star star-1" id="star-1-2" type="radio" name="star" />
+                                    <label class="star star-1" for="star-1-2"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+-->
+
+                    <div id="loadQuestion"></div>
+
+                    <div ng-show="showSubmit">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  text-center">
+                            <button class="btn btn-primary" ng-click="addvalue()">Submit</button>
+                        </div>
+                    </div>
+                    <!--
+                    <div ng-show="showSubmit">
+                        <button class="btn btn-primary center-block" ng-click="addvalue()">Submit</button>
+                    </div>
+-->
+                    <br>
+                    <br>
+                </div>
+
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <div class="form-group input-group">
+                        <div class="fixed-1">
+                            <button class="btn btn-default btn-hover" style="border-radius: 50%;" ng-click="addDynamically()" title="Add Question"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <br>
+                        <div class="fixed-2">
+                            <button class="btn btn-link" style="border-radius: 50%;" ng-show="showDropdown" ng-click="addEl('TEXT')" title="Add Question"><i class="fa fa-text-width"></i></button>
+                        </div>
+                        <br>
+                        <div class="fixed-3">
+                            <button class="btn btn-link" style="border-radius: 50%;" ng-show="showDropdown" ng-click="addEl('MCQ1')" title="Add Question"><i class="fa fa-dot-circle-o"></i></button>
+                        </div>
+                        <br>
+                        <div class="fixed-4">
+                            <button class="btn btn-link" style="border-radius: 50%;" ng-show="showDropdown" ng-click="addEl('MCQN')" title="Add Question"><i class="fa fa-check-square-o"></i></button>
+                        </div>
+                        <br>
+                        <div class="fixed-5">
+                            <button class="btn btn-link" style="border-radius: 50%;" ng-show="showDropdown" ng-click="addEl('RATE')" title="Add Question"><i class="fa fa-star-half-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

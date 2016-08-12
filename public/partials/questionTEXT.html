@@ -1,0 +1,19 @@
+<div ng-repeat="elem in elements[0].text1">
+    <div>
+        <br>
+        <span ng-model="elem.question" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+            {{ elem.question }}
+        </span>
+        <div ng-show="editorEnabled">
+            <input ng-model="elem.question" ng-show="editorEnabled">
+            <button class="btn btn-default center-block" href="#" ng-click="editorEnabled=false">Done editing</button>
+        </div>
+        <br>
+
+        <div>
+            <input type="text" disabled ng-model="answer">
+        </div>
+        <button class="btn btn-default center-block" ng-click="saveItemText(elem,$index)">Save Question</button>
+        <button class="btn btn-default center-block" ng-click="deleteItemText(elem,$index)">Delete Question</button>
+    </div>
+</div>

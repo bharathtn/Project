@@ -1,0 +1,49 @@
+<div id="page-wrapper" data-ng-controller="UsersCtrl">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Hello {{ currentUser.firstname }}, here are all registered users.
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i> <a href="#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-users"></i> Users
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Users
+                        </th>
+                        <th>
+                            email
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr pagination-id="users" dir-paginate-start="user in users | itemsPerPage: limit" total-items="total" current-page="page">
+                        <td>
+                            {{ user.firstname }} {{ user.lastname }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                    </tr>
+                    <tr dir-paginate-end />
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <dir-pagination-controls pagination-id="users" template-url="../lib/pagination/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+    </div>
+</div>

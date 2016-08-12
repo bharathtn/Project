@@ -1,0 +1,32 @@
+<div ng-repeat="elem in elements[3].rate">
+    <div>
+        <br>
+        <span ng-model="elem.question" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+            {{ elem.question }}
+        </span>
+        <div ng-show="editorEnabled">
+            <input ng-model="elem.question" ng-show="editorEnabled">
+            <button class="btn btn-default center-block" href="#" ng-click="editorEnabled=false">Done editing</button>
+        </div>
+        <button class="btn btn-default center-block" ng-click="saveItemRate(elem,$index)">Save Question</button>
+        <button class="btn btn-default center-block" ng-click="deleteItemRate(elem,$index)">Delete Question</button>
+        <br>
+
+        <div class="cont">
+            <div class="stars">
+                <form action="">
+                    <input disabled class="star star-5" id="star-5-2" type="radio" name="star" />
+                    <label class="star star-5" for="star-5-2"></label>
+                    <input disabled class="star star-4" id="star-4-2" type="radio" name="star" />
+                    <label class="star star-4" for="star-4-2"></label>
+                    <input disabled class="star star-3" id="star-3-2" type="radio" name="star" />
+                    <label class="star star-3" for="star-3-2"></label>
+                    <input disabled class="star star-2" id="star-2-2" type="radio" name="star" />
+                    <label class="star star-2" for="star-2-2"></label>
+                    <input disabled class="star star-1" id="star-1-2" type="radio" name="star" />
+                    <label class="star star-1" for="star-1-2"></label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

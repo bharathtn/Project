@@ -1,0 +1,64 @@
+<div id="page-wrapper" data-ng-controller="QuestionnaireCtrl" data-ng-init="sendTo()">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                            Responses
+                        </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i> <a href="#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-mail-reply"></i> Responses
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Question
+                        </th>
+                        <th class="text-center">
+                            Edit
+                        </th>
+                        <th class="text-center">
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr pagination-id="questions" dir-paginate-start="question in responseAnswers.answers | itemsPerPage: limit" total-items="total" current-page="page">
+                        <td>
+                            {{ question.text }}
+                            <br>
+                            <br>
+                            <div ng-repeat="option in question.options">
+                                <input type="{{ question.type }}" name="same" class="radio-inline" ng-model="option" disabled> {{ option }}
+                            </div>
+                            <br>
+                        </td>
+
+                        <td>
+                            <button class="btn btn-default center-block" type="button" ng-click="setQID(question._id)">Edit</a>
+                        </td>
+                        <td>
+                            <button class="btn btn-default center-block" type="button" ng-click="delete(question._id)">Delete</a>
+                        </td>
+                        <tr dir-paginate-end />
+                </tbody>
+            </table>
+            <div class="text-center">
+                <dir-pagination-controls pagination-id="questions" template-url="../lib/pagination/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+            </div>
+        </div>
+        <!--
+        <h5 class="pull-right"><a href="newquest.html">Add New Question</a></h5>
+-->
+    </div>
+</div>
